@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<title>ZankoLine</title>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f4f8fc;
+    color: #17263b;
+    font-family: "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+}
+
+
+/* =====================================================
+   PAGE 1
+===================================================== */
+
+#page1 {
+    display: block;
+}
+
+#page2 {
+    display: none;
+}
+
+
+/* TOP BAR */
+
+.login-topbar {
+    height: 70px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 28px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.login-menu {
+    width: 32px;
+    cursor: pointer;
+    direction: ltr;
+}
+
+.login-menu span {
+    display: block;
+
+    width: 27px;
+    height: 3px;
+
+    background: #536b80;
+
+    margin: 5px 0;
+
+    border-radius: 3px;
+}
+
+
+/* LOGIN CARD */
+
+.login-main-card {
+    width: 775px;
+    max-width: calc(100% - 30px);
+
+    margin: 42px auto;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 42px 55px 50px;
+
+    box-shadow: 0 7px 25px rgba(55, 82, 105, 0.08);
+
+    text-align: center;
+}
+
+
+/* WELCOME */
+
+.welcome {
+    font-size: 22px;
+    color: #53697d;
+
+    margin-bottom: 25px;
+}
+
+
+/* LOGO */
+
+.logo-ku {
+    font-size: 42px;
+
+    font-weight: 900;
+
+    color: #d6d9dc;
+
+    letter-spacing: -2px;
+
+    text-shadow:
+        -1px -1px 0 #aeb5bb,
+         1px 1px 0 white;
+
+    margin-bottom: 0;
+}
+
+.logo-line {
+    width: 205px;
+    height: 3px;
+
+    background: #d1d5d8;
+
+    margin: 3px auto 5px;
+
+    border-radius: 5px;
+}
+
+.logo-en {
+    font-size: 29px;
+
+    font-weight: 700;
+
+    color: #d1d5d8;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        -1px -1px 0 #aeb5bb,
+         1px 1px 0 white;
+}
+
+
+/* LOGIN TITLE */
+
+.login-title {
+    font-size: 27px;
+
+    font-weight: 700;
+
+    color: #4c6277;
+
+    margin: 40px 0 30px;
+}
+
+
+/* INPUTS */
+
+.form-group {
+    text-align: right;
+
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 16px;
+
+    color: #536a7f;
+
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+
+    height: 48px;
+
+    border: 1px solid #d9e1e8;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    padding: 0 15px;
+
+    font-size: 16px;
+
+    outline: none;
+
+    color: #34495e;
+}
+
+.form-group input:focus {
+    border-color: #8da8bc;
+}
+
+
+/* CAPTCHA */
+
+.captcha {
+    direction: ltr;
+
+    width: 100%;
+    height: 78px;
+
+    border: 1px solid #d9d9d9;
+
+    background: #fafafa;
+
+    border-radius: 3px;
+
+    margin: 28px 0 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.captcha-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.check {
+    width: 28px;
+    height: 28px;
+
+    background: white;
+
+    border: 2px solid #b9b9b9;
+
+    border-radius: 3px;
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+.check.loading {
+    border: 3px solid #ddd;
+
+    border-top-color: #4285f4;
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+}
+
+.check.checked {
+    border-color: #43a765;
+
+    background: white;
+}
+
+.check.checked::before {
+    content: "";
+
+    position: absolute;
+
+    width: 10px;
+    height: 21px;
+
+    border-right: 5px solid #43a765;
+    border-bottom: 5px solid #43a765;
+
+    transform: rotate(45deg);
+
+    left: 7px;
+    top: -1px;
+
+    border-radius: 2px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.captcha-text {
+    font-size: 15px;
+    color: #333;
+}
+
+.captcha-right {
+    text-align: center;
+
+    color: #777;
+
+    font-size: 10px;
+}
+
+.captcha-logo {
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: #777;
+
+    line-height: 25px;
+}
+
+
+/* ERROR */
+
+.error-message {
+    display: none;
+
+    color: #d9534f;
+
+    background: #fff1f1;
+
+    border: 1px solid #f1c4c4;
+
+    border-radius: 7px;
+
+    padding: 11px 15px;
+
+    margin: 0 0 18px;
+
+    font-size: 15px;
+
+    text-align: center;
+}
+
+
+/* LOGIN BUTTON */
+
+.login-btn {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #58758e;
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.login-btn:hover {
+    background: #49677f;
+}
+
+.login-btn:active {
+    transform: scale(0.99);
+}
+
+
+/* =====================================================
+   PAGE 2
+===================================================== */
+
+.page2-body {
+    background: #f4f8fc;
+
+    min-height: 100vh;
+}
+
+
+/* TOP MENU */
+
+.topbar {
+    height: 92px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e6e6e6;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 7%;
+}
+
+.menu {
+    margin-right: auto;
+
+    width: 48px;
+    height: 42px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.menu span {
+    display: block;
+
+    width: 44px;
+    height: 5px;
+
+    background: #555;
+
+    border-radius: 5px;
+}
+
+
+/* MAIN */
+
+.container {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 46px 30px 70px;
+}
+
+
+/* STUDENT INFORMATION */
+
+.student-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #d9e0e6;
+
+    border-radius: 27px;
+
+    overflow: hidden;
+
+    margin-bottom: 64px;
+
+    box-shadow: 0 1px 4px rgba(0,0,0,0.025);
+}
+
+.student-header {
+    height: 112px;
+
+    background: #d9e9fc;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding: 0 40px;
+
+    font-size: 37px;
+
+    font-weight: 700;
+}
+
+.student-body {
+    background: #ffffff;
+
+    text-align: center;
+
+    padding: 28px 25px 38px;
+}
+
+.student-name {
+    font-size: 34px;
+
+    font-weight: 700;
+
+    color: #17263b;
+
+    margin-bottom: 34px;
+}
+
+.exam-line {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    direction: rtl;
+
+    font-size: 25px;
+}
+
+.exam-label {
+    color: #39404a;
+
+    font-weight: 400;
+}
+
+.exam-number {
+    direction: ltr;
+
+    color: #50677f;
+
+    font-size: 29px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    border: none;
+}
+
+
+/* GENERAL INFORMATION */
+
+.general-card {
+    width: 100%;
+
+    min-height: 315px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9e0e6;
+
+    border-top: 7px solid #07933d;
+
+    border-radius: 27px;
+
+    padding: 45px 48px 43px;
+
+    margin-bottom: 64px;
+
+    box-shadow: 0 1px 4px rgba(0,0,0,0.025);
+}
+
+.general-title {
+    text-align: right;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    margin-bottom: 43px;
+}
+
+.general-text {
+    text-align: center;
+
+    color: #596777;
+
+    font-size: 24px;
+
+    font-weight: 400;
+
+    line-height: 2.15;
+}
+
+
+/* STATUS CARD */
+
+.status-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #d9e0e6;
+
+    border-radius: 27px;
+
+    overflow: hidden;
+
+    margin-bottom: 64px;
+
+    box-shadow: 0 1px 4px rgba(0,0,0,0.025);
+}
+
+
+/* STATUS HEADER */
+
+.status-header {
+    height: 112px;
+
+    background: #d9e9fc;
+
+    border-bottom: 4px solid #8b9bcf;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding: 0 40px;
+
+    font-size: 37px;
+
+    font-weight: 700;
+}
+
+.graduation-icon {
+    width: 49px;
+    height: 49px;
+
+    margin-left: 18px;
+
+    flex-shrink: 0;
+}
+
+
+/* INSTRUCTION */
+
+.instruction {
+    min-height: 126px;
+
+    background: #eaf3ff;
+
+    border-bottom: 3px solid #c4d4e9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 20px 50px;
+
+    color: #596777;
+
+    font-size: 23px;
+
+    font-weight: 400;
+
+    line-height: 2.15;
+}
+
+
+/* DETAILS */
+
+.details {
+    padding: 22px 35px 30px;
+}
+
+.detail-row {
+    width: 100%;
+
+    min-height: 105px;
+
+    display: flex;
+
+    flex-direction: row-reverse;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 28px;
+}
+
+
+/* TEXT */
+
+.detail-text {
+    flex: 1;
+
+    text-align: right;
+
+    color: #17263b;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    line-height: 1.65;
+}
+
+.university {
+    font-size: 29px;
+
+    padding-left: 5px;
+}
+
+.number {
+    font-size: 33px;
+
+    direction: ltr;
+}
+
+.date {
+    font-size: 31px;
+
+    direction: ltr;
+}
+
+.accepted {
+    font-size: 30px;
+}
+
+
+/* ICON BOX */
+
+.icon-box {
+    width: 92px;
+    height: 92px;
+
+    flex: 0 0 92px;
+
+    border-radius: 23px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.green-icon {
+    background: #e6faed;
+
+    color: #35b970;
+}
+
+.blue-icon {
+    background: #f0f5fb;
+
+    color: #182d46;
+}
+
+.icon-box svg {
+    width: 48px;
+    height: 48px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+/* HASH */
+
+.hash-icon {
+    color: #35b970;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 51px;
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.options-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #d9e0e6;
+
+    border-radius: 27px;
+
+    overflow: hidden;
+
+    box-shadow: 0 1px 4px rgba(0,0,0,0.025);
+
+    cursor: pointer;
+
+    transition: transform 0.15s ease;
+}
+
+.options-card:active {
+    transform: scale(0.99);
+}
+
+.options-header {
+    min-height: 112px;
+
+    background: #d9e9fc;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding: 0 40px;
+
+    font-size: 37px;
+
+    font-weight: 700;
+}
+
+.options-icon {
+    width: 49px;
+    height: 49px;
+
+    margin-left: 18px;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #e6faed;
+
+    color: #35b970;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 34px;
+
+    font-family: Arial, sans-serif;
+}
+
+.unavailable-message {
+    display: none;
+
+    background: #ffffff;
+
+    border: 1px solid #d9e0e6;
+
+    border-radius: 20px;
+
+    margin-top: 18px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: #596777;
+
+    font-size: 23px;
+
+    box-shadow: 0 1px 4px rgba(0,0,0,0.025);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    /* PAGE 1 */
+
+    .login-topbar {
+        height: 62px;
+
+        padding: 0 18px;
+    }
+
+    .login-main-card {
+        margin: 22px auto;
+
+        padding: 30px 22px 35px;
+
+        border-radius: 17px;
+    }
+
+    .welcome {
+        font-size: 19px;
+    }
+
+    .logo-ku {
+        font-size: 34px;
+    }
+
+    .logo-en {
+        font-size: 24px;
+    }
+
+    .login-title {
+        font-size: 24px;
+
+        margin-top: 32px;
+    }
+
+
+    /* PAGE 2 */
+
+    .topbar {
+        height: 72px;
+
+        padding: 0 28px;
+    }
+
+    .menu {
+        width: 40px;
+        height: 35px;
+    }
+
+    .menu span {
+        width: 37px;
+        height: 4px;
+    }
+
+    .container {
+        padding: 43px 27px 60px;
+    }
+
+
+    .student-card {
+        border-radius: 22px;
+
+        margin-bottom: 58px;
+    }
+
+    .student-header {
+        height: 91px;
+
+        padding: 0 27px;
+
+        font-size: 29px;
+    }
+
+    .student-body {
+        padding: 27px 18px 34px;
+    }
+
+    .student-name {
+        font-size: 27px;
+
+        margin-bottom: 31px;
+    }
+
+    .exam-line {
+        font-size: 20px;
+
+        gap: 9px;
+    }
+
+    .exam-number {
+        font-size: 24px;
+    }
+
+
+    .general-card {
+        min-height: 258px;
+
+        border-radius: 22px;
+
+        border-top-width: 6px;
+
+        padding: 39px 25px 40px;
+
+        margin-bottom: 57px;
+    }
+
+    .general-title {
+        font-size: 28px;
+
+        margin-bottom: 35px;
+    }
+
+    .general-text {
+        font-size: 19px;
+
+        line-height: 2.2;
+    }
+
+
+    .status-card {
+        border-radius: 22px;
+
+        margin-bottom: 57px;
+    }
+
+    .status-header {
+        height: 92px;
+
+        padding: 0 25px;
+
+        font-size: 28px;
+
+        border-bottom-width: 3px;
+    }
+
+    .graduation-icon {
+        width: 40px;
+        height: 40px;
+
+        margin-left: 13px;
+    }
+
+    .instruction {
+        min-height: 119px;
+
+        padding: 20px 25px;
+
+        font-size: 18px;
+
+        line-height: 2.15;
+    }
+
+    .details {
+        padding: 18px 20px 27px;
+    }
+
+    .detail-row {
+        min-height: 91px;
+
+        gap: 16px;
+    }
+
+    .icon-box {
+        width: 76px;
+        height: 76px;
+
+        flex-basis: 76px;
+
+        border-radius: 20px;
+    }
+
+    .icon-box svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hash-icon {
+        font-size: 43px;
+    }
+
+    .detail-text {
+        font-size: 25px;
+    }
+
+    .university {
+        font-size: 23px;
+
+        line-height: 1.75;
+    }
+
+    .number {
+        font-size: 27px;
+    }
+
+    .date {
+        font-size: 26px;
+    }
+
+    .accepted {
+        font-size: 25px;
+    }
+
+
+    .options-card {
+        border-radius: 22px;
+    }
+
+    .options-header {
+        min-height: 92px;
+
+        padding: 0 25px;
+
+        font-size: 28px;
+    }
+
+    .options-icon {
+        width: 40px;
+        height: 40px;
+
+        margin-left: 13px;
+
+        font-size: 28px;
+
+        border-radius: 10px;
+    }
+
+    .unavailable-message {
+        font-size: 18px;
+
+        padding: 20px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PAGE 1
+===================================================== -->
+
+<div id="page1">
+
+    <div class="login-topbar">
+
+        <div class="login-menu">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+    </div>
+
+
+    <div class="login-main-card">
+
+        <div class="welcome">
+            بەخێربێیت بۆ زانکۆ لاین
+        </div>
+
+
+        <div class="logo-ku">
+            زانکۆلاین
+        </div>
+
+        <div class="logo-line"></div>
+
+        <div class="logo-en">
+            ZankoLine
+        </div>
+
+
+        <div class="login-title">
+            چوونە ژوورەوە
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="username">
+                بەکارهێنەر
+            </label>
+
+            <input type="text" id="username">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="password">
+                وشەی تێپەڕ
+            </label>
+
+            <input type="password" id="password">
+
+        </div>
+
+
+        <div class="captcha">
+
+            <div class="captcha-left">
+
+                <div class="check" id="check"></div>
+
+                <div class="captcha-text">
+                    I'm not a robot
+                </div>
+
+            </div>
+
+
+            <div class="captcha-right">
+
+                <div class="captcha-logo">
+                    ↻
+                </div>
+
+                reCAPTCHA
+
+            </div>
+
+        </div>
+
+
+        <div class="error-message" id="errorMessage">
+            زانیاریەکان هەڵەن
+        </div>
+
+
+        <button class="login-btn" onclick="login()">
+            چوونە ژوورەوە
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     PAGE 2
+===================================================== -->
+
+<div id="page2" class="page2-body">
+
+
+<header class="topbar">
+
+    <div class="menu">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- STUDENT INFORMATION -->
+
+<section class="student-card">
+
+    <div class="student-header">
+        زانیاری قوتابی
+    </div>
+
+
+    <div class="student-body">
+
+        <div class="student-name">
+            لارا محسین قادر سعید
+        </div>
+
+
+        <div class="exam-line">
+
+            <span class="exam-label">
+                ژمارەی ئەزمونی:
+            </span>
+
+            <span class="exam-number">
+                2622012350044
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- GENERAL INFORMATION -->
+
+<section class="general-card">
+
+    <div class="general-title">
+        زانیاری گشتی:
+    </div>
+
+
+    <div class="general-text">
+        تکایە یەکێک لە قۆناغە چالاکەکان هەڵبژێرە بە پێی پێویستیت..
+    </div>
+
+</section>
+
+
+
+<!-- STUDENT STATUS -->
+
+<section class="status-card">
+
+
+    <div class="status-header">
+
+
+        <svg class="graduation-icon"
+             viewBox="0 0 64 64">
+
+            <path
+                d="M6 24L32 11L58 24L32 37L6 24Z"
+                stroke="#17263b"
+                stroke-width="2.5"
+                fill="none"/>
+
+
+            <path
+                d="M16 30V41C24 47 40 47 48 41V30"
+                stroke="#17263b"
+                stroke-width="2.5"
+                fill="none"/>
+
+
+            <path
+                d="M58 24V38"
+                stroke="#17263b"
+                stroke-width="2.5"
+                fill="none"/>
+
+
+            <circle
+                cx="58"
+                cy="40"
+                r="2"
+                fill="#17263b"/>
+
+        </svg>
+
+
+        <span>
+            بەرواری باری قوتابی
+        </span>
+
+    </div>
+
+
+
+    <div class="instruction">
+
+        تکایە یەکێک لە قۆناغە چالاکەکان هەڵبژێرە بە پێی پێویستیت..
+
+    </div>
+
+
+
+    <div class="details">
+
+
+        <!-- UNIVERSITY -->
+
+        <div class="detail-row">
+
+            <div class="detail-text university">
+
+                زانکۆی دهۆک /
+                کۆلێژی پزیشکی /
+                دەرمانسازی /
+                پارالێڵ
+
+            </div>
+
+
+            <div class="icon-box green-icon">
+
+                <svg viewBox="0 0 64 64">
+
+                    <path d="M13 53H51"/>
+
+                    <rect
+                        x="18"
+                        y="15"
+                        width="28"
+                        height="38"
+                        rx="2"/>
+
+                    <path d="M24 23H28"/>
+                    <path d="M36 23H40"/>
+
+                    <path d="M24 31H28"/>
+                    <path d="M36 31H40"/>
+
+                    <path d="M24 39H28"/>
+                    <path d="M36 39H40"/>
+
+                    <path d="M29 53V45H35V53"/>
+
+                </svg>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NUMBER -->
+
+        <div class="detail-row">
+
+            <div class="detail-text number">
+                602
+            </div>
+
+
+            <div class="icon-box green-icon">
+
+                <span class="hash-icon">
+                    #
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DATE -->
+
+        <div class="detail-row">
+
+            <div class="detail-text date">
+                30-9-2026
+            </div>
+
+
+            <div class="icon-box blue-icon">
+
+                <svg viewBox="0 0 64 64">
+
+                    <rect
+                        x="10"
+                        y="15"
+                        width="44"
+                        height="40"
+                        rx="5"/>
+
+                    <path d="M10 27H54"/>
+
+                    <path d="M21 9V20"/>
+                    <path d="M43 9V20"/>
+
+                    <path d="M19 35H24"/>
+                    <path d="M29 35H34"/>
+                    <path d="M39 35H44"/>
+
+                    <path d="M19 44H24"/>
+                    <path d="M29 44H34"/>
+                    <path d="M39 44H44"/>
+
+                </svg>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACCEPTED -->
+
+        <div class="detail-row">
+
+            <div class="detail-text accepted">
+                قەبووڵکراو
+            </div>
+
+
+            <div class="icon-box blue-icon">
+
+                <svg viewBox="0 0 64 64">
+
+                    <rect
+                        x="15"
+                        y="9"
+                        width="34"
+                        height="46"
+                        rx="5"/>
+
+                    <path d="M25 17H39"/>
+
+                    <path d="M21 29L25 33L31 25"/>
+
+                    <path d="M35 29H43"/>
+
+                    <path d="M21 42L25 46L31 38"/>
+
+                    <path d="M35 42H43"/>
+
+                </svg>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     OPTIONS
+===================================================== -->
+
+<section class="options-card"
+         onclick="showUnavailable()">
+
+
+    <div class="options-header">
+
+        <div class="options-icon">
+            ☷
+        </div>
+
+
+        <span>
+            هەڵبژاردنەکان
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<div class="unavailable-message"
+     id="unavailableMessage">
+
+    ئەم بەشە بەردەست نییە.
+
+</div>
+
+
+</main>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   CAPTCHA
+===================================================== */
+
+const check = document.getElementById("check");
+
+check.onclick = function () {
+
+    if (
+        check.classList.contains("loading") ||
+        check.classList.contains("checked")
+    ) {
+        return;
+    }
+
+    check.classList.add("loading");
+
+    setTimeout(function () {
+
+        check.classList.remove("loading");
+
+        check.classList.add("checked");
+
+    }, 1200);
+
+};
+
+
+
+/* =====================================================
+   LOGIN → PAGE 2
+===================================================== */
+
+function login() {
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value.trim();
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+
+    /* Demo information */
+
+    const correctUsername = "2622012350044";
+    const correctPassword = "49812189";
+
+
+    if (
+        username === correctUsername &&
+        password === correctPassword
+    ) {
+
+        errorMessage.style.display = "none";
+
+
+        /* PAGE 1 OFF */
+
+        document.getElementById("page1").style.display = "none";
+
+
+        /* PAGE 2 ON */
+
+        document.getElementById("page2").style.display = "block";
+
+
+        /* Scroll to top */
+
+        window.scrollTo(0, 0);
+
+    }
+
+    else {
+
+        errorMessage.style.display = "block";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   OPTIONS MESSAGE
+===================================================== */
+
+function showUnavailable() {
+
+    const message =
+        document.getElementById("unavailableMessage");
+
+
+    if (message.style.display === "block") {
+
+        message.style.display = "none";
+
+    }
+
+    else {
+
+        message.style.display = "block";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+</html>
